@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/sh4ke/repos/flask_server/venv"
+VIRTUAL_ENV="/home/sh4ke/repos/flask_responsive_table/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
