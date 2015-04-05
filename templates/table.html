@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="jumbo">
+        <h2><span id='console-event' class="label label-default">Label</span></h2>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for result in values %}
+            <tr>
+                <td>{{result.id}}</td>
+                <td>{{result.param}}</td>
+                <td>{{result.val}}</td>
+                <td><input id="toggle-{{result.id}}" data-onstyle="success" 
+                        data-offstyle="danger" type="checkbox"></td>
+                <script>
+                    $(function() {
+                        $('#toggle-{{result.id}}').bootstrapToggle({
+                            on: 'Running',
+                            off: 'Stopped'
+                        })
+                        
+                        // configures a toggle-event handler, which updates the notification Label
+                        $('#toggle-{{result.id}}').change(function() {
+                            $('#console-event').html('Toggle-{{result.id}}: ' + $(this).prop('checked'))
+                        }) 
+                    });
+
+                    {% if result.state == 'running' %}
+                        $('#toggle-{{result.id}}').prop('checked', true).change()
+                    {% else %}
+                        $('#toggle-{{result.id}}').prop('checked', false).change()
+                    {% endif %}
+                </script> 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
